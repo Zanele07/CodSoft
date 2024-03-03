@@ -1,0 +1,55 @@
+import javax.swing.*;
+import java.util.Scanner;
+import java.util.Random;
+
+public class NumberGame {
+    public static int wins=0; //every funtion to access wins
+    public static void main(String[] args) {
+        Guess();
+        Scanner input = new Scanner(System.in);
+        System.out.println("Do you want to play again?");
+        String playAgain = input.next();
+        while(playAgain.equalsIgnoreCase("Yes")){
+            Guess();
+            System.out.println("Do you want to play again?");
+            playAgain = input.next();
+
+        }
+        System.out.println("You have won "+wins);
+        if(playAgain.equalsIgnoreCase("No")){
+            System.out.println("Thank you for playing.");
+        }
+    }
+
+
+    public static void Guess(){
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        int randomNum = random.nextInt(100);
+        int guess=-1;
+        int attempts =0;
+        int maxAttempts=5;
+        while (attempts<maxAttempts && ! (randomNum==guess )){
+            System.out.println("Enter a number between 0 and 100:");
+
+            guess = scanner.nextInt();
+            if(guess== randomNum){
+                System.out.println("Guess correct");
+                wins++;
+            } else if (guess<randomNum) {
+                System.out.println("Guess is too low");
+            } else if (guess>randomNum) {
+                System.out.println("Guess too high");
+
+            }
+            attempts++;
+
+        }
+        if(randomNum!=guess)
+            System.out.println("You have failed to guess the correct number.");
+
+
+
+    }
+}
